@@ -13,7 +13,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #000; /* dark black background */
+    background: #000;
     overflow: hidden;
     position: relative;
 }
@@ -32,13 +32,13 @@ body::before {
 /* ====== Card ====== */
 .card {
     position: relative;
-    background: rgba(0, 51, 102, 0.6); /* Blue glass */
+    background: rgba(0, 51, 102, 0.6);
     backdrop-filter: blur(15px);
     border-radius: 25px;
     padding: 35px;
     width: 350px;
     text-align: center;
-    box-shadow: 0 0 25px #00bfffaa; /* Soft glow */
+    box-shadow: 0 0 25px #00bfffaa;
     color: white;
     z-index: 1;
 }
@@ -74,30 +74,12 @@ input {
     text-align: center;
 }
 
-/* ====== Button ====== */
-button {
-    width: 100%;
-    padding: 14px;
-    border-radius: 12px;
-    border: none;
-    background: linear-gradient(45deg, #00f0ff, #0080ff);
-    font-weight: bold;
-    font-size: 16px;
-    cursor: pointer;
-    transition: 0.3s;
-    color: white;
-}
-button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 15px #00bfff;
-}
-
 /* ====== Result ====== */
 .result {
     margin-top: 20px;
     font-size: 22px;
     font-weight: bold;
-    color: black; /* black Ks text */
+    color: black;
     background: rgba(255,255,255,0.7);
     border-radius: 10px;
     padding: 8px;
@@ -111,12 +93,10 @@ button:hover {
     <div class="header">Zsnix Studio</div>
 
     <div class="rate-label">Coin Rate (1000 coin = Ks)</div>
-    <input type="number" id="rateInput" value="74800">
+    <input type="number" id="rateInput" value="74800" oninput="calculatePrice()">
 
     <div class="rate-label">Coin Amount</div>
-    <input type="number" id="coinInput" placeholder="Enter coin amount">
-
-    <button onclick="calculatePrice()">Calculate</button>
+    <input type="number" id="coinInput" placeholder="Enter coin amount" oninput="calculatePrice()">
 
     <div class="result" id="result">0 Ks</div>
 </div>
@@ -140,6 +120,9 @@ function calculatePrice() {
     let total = coin * pricePerCoin;
     resultBox.innerHTML = formatNumber(Math.round(total)) + " Ks";
 }
+
+// Auto calculate on page load
+calculatePrice();
 </script>
 
 </body>
