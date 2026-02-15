@@ -7,7 +7,7 @@
 <style>
 * { box-sizing: border-box; font-family: 'Segoe UI', sans-serif; margin:0; padding:0; }
 
-/* ===== Body Background ===== */
+/* Body Background */
 body {
     height: 100vh;
     display: flex;
@@ -18,7 +18,7 @@ body {
     position: relative;
 }
 
-/* ===== Glow Background ===== */
+/* Glow Background */
 body::before {
     content: "";
     position: absolute;
@@ -29,7 +29,7 @@ body::before {
     z-index: 0;
 }
 
-/* ===== Card ===== */
+/* Card */
 .card {
     position: relative;
     background: rgba(0, 51, 102, 0.6);
@@ -43,7 +43,7 @@ body::before {
     z-index: 1;
 }
 
-/* ===== Header ===== */
+/* Header */
 .header {
     font-size: 28px;
     font-weight: 700;
@@ -54,7 +54,7 @@ body::before {
     margin-bottom: 10px;
 }
 
-/* ===== Subheader ===== */
+/* Subheader */
 .subheader {
     font-size: 18px;
     font-weight: 500;
@@ -62,7 +62,7 @@ body::before {
     margin-bottom: 25px;
 }
 
-/* ===== Labels ===== */
+/* Labels */
 .rate-label {
     font-size: 12px;
     margin-bottom: 5px;
@@ -70,7 +70,7 @@ body::before {
     text-align: left;
 }
 
-/* ===== Inputs ===== */
+/* Inputs */
 input {
     width: 100%;
     padding: 14px;
@@ -82,7 +82,7 @@ input {
     text-align: center;
 }
 
-/* ===== Button ===== */
+/* Button */
 button {
     width: 100%;
     padding: 14px;
@@ -100,7 +100,7 @@ button:hover {
     box-shadow: 0 0 15px #00bfff;
 }
 
-/* ===== Result ===== */
+/* Result */
 .result {
     margin-top: 20px;
     font-size: 22px;
@@ -136,11 +136,15 @@ function formatNumber(num) {
 }
 
 function calculatePrice() {
-    let coin = parseFloat(document.getElementById('coinInput').value);
-    let rate = parseFloat(document.getElementById('rateInput').value);
+    let coinInput = document.getElementById('coinInput').value;
+    let rateInput = document.getElementById('rateInput').value;
+
+    let coin = parseFloat(coinInput);
+    let rate = parseFloat(rateInput);
+
     let resultBox = document.getElementById("result");
 
-    // Bug fix: correct logical operators
+    // Correct logical operators
     if (isNaN(coin)  coin <= 0  isNaN(rate) || rate <= 0) {
         resultBox.innerHTML = "0 Ks";
         return;
@@ -148,10 +152,11 @@ function calculatePrice() {
 
     let pricePerCoin = rate / 1000;
     let total = coin * pricePerCoin;
+
     resultBox.innerHTML = formatNumber(Math.round(total)) + " Ks";
 }
 
-// Optional: auto calculate if you want when page loads
+// Optional: auto calculate when page loads
 calculatePrice();
 </script>
 
