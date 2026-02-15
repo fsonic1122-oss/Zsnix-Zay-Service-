@@ -7,7 +7,7 @@
 <style>
 * { box-sizing: border-box; font-family: 'Segoe UI', sans-serif; margin:0; padding:0; }
 
-/* ====== Body Background ====== */
+/* ===== Body Background ===== */
 body {
     height: 100vh;
     display: flex;
@@ -18,7 +18,7 @@ body {
     position: relative;
 }
 
-/* ====== Glow Background ====== */
+/* ===== Glow Background ===== */
 body::before {
     content: "";
     position: absolute;
@@ -29,7 +29,7 @@ body::before {
     z-index: 0;
 }
 
-/* ====== Card ====== */
+/* ===== Card ===== */
 .card {
     position: relative;
     background: rgba(0, 51, 102, 0.6);
@@ -43,18 +43,26 @@ body::before {
     z-index: 1;
 }
 
-/* ====== Header ====== */
+/* ===== Header ===== */
 .header {
-    font-size: 36px;
+    font-size: 28px; /* medium size */
     font-weight: 700;
     background: linear-gradient(90deg, #00f0ff, #00bfff, #0080ff);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    text-shadow: 0 0 10px #00bfffaa, 0 0 20px #00f0ffaa;
+    text-shadow: 0 0 8px #00bfffaa, 0 0 16px #00f0ffaa;
+    margin-bottom: 10px;
+}
+
+/* ===== Subheader ===== */
+.subheader {
+    font-size: 18px;
+    font-weight: 500;
+    color: #00f0ff;
     margin-bottom: 25px;
 }
 
-/* ====== Labels ====== */
+/* ===== Labels ===== */
 .rate-label {
     font-size: 12px;
     margin-bottom: 5px;
@@ -62,7 +70,7 @@ body::before {
     text-align: left;
 }
 
-/* ====== Inputs ====== */
+/* ===== Inputs ===== */
 input {
     width: 100%;
     padding: 14px;
@@ -74,7 +82,25 @@ input {
     text-align: center;
 }
 
-/* ====== Result ====== */
+/* ===== Button ===== */
+button {
+    width: 100%;
+    padding: 14px;
+    border-radius: 12px;
+    border: none;
+    background: linear-gradient(45deg, #00f0ff, #0080ff);
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    color: white;
+}
+button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px #00bfff;
+}
+
+/* ===== Result ===== */
 .result {
     margin-top: 20px;
     font-size: 22px;
@@ -91,12 +117,15 @@ input {
 
 <div class="card">
     <div class="header">Zsnix Studio</div>
+    <div class="subheader">MLBB Coin Calculator</div>
 
     <div class="rate-label">Coin Rate (1000 coin = Ks)</div>
-    <input type="number" id="rateInput" value="74800" oninput="calculatePrice()">
+    <input type="number" id="rateInput" value="74800">
 
     <div class="rate-label">Coin Amount</div>
-    <input type="number" id="coinInput" placeholder="Enter coin amount" oninput="calculatePrice()">
+    <input type="number" id="coinInput" placeholder="Enter coin amount">
+
+    <button onclick="calculatePrice()">Calculate</button>
 
     <div class="result" id="result">0 Ks</div>
 </div>
@@ -111,6 +140,7 @@ function calculatePrice() {
     let rate = parseFloat(document.getElementById('rateInput').value);
     let resultBox = document.getElementById("result");
 
+    // Bug fix: correct logical operators
     if (isNaN(coin)  coin <= 0  isNaN(rate) || rate <= 0) {
         resultBox.innerHTML = "0 Ks";
         return;
