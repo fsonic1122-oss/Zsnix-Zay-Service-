@@ -7,7 +7,6 @@
 <style>
 * { box-sizing: border-box; font-family: 'Segoe UI', sans-serif; margin:0; padding:0; }
 
-/* Body Background */
 body {
     height: 100vh;
     display: flex;
@@ -18,7 +17,6 @@ body {
     position: relative;
 }
 
-/* Glow Background */
 body::before {
     content: "";
     position: absolute;
@@ -29,7 +27,6 @@ body::before {
     z-index: 0;
 }
 
-/* Card */
 .card {
     position: relative;
     background: rgba(0, 51, 102, 0.6);
@@ -43,7 +40,6 @@ body::before {
     z-index: 1;
 }
 
-/* Header */
 .header {
     font-size: 28px;
     font-weight: 700;
@@ -54,7 +50,6 @@ body::before {
     margin-bottom: 10px;
 }
 
-/* Subheader */
 .subheader {
     font-size: 18px;
     font-weight: 500;
@@ -62,7 +57,6 @@ body::before {
     margin-bottom: 25px;
 }
 
-/* Labels */
 .rate-label {
     font-size: 12px;
     margin-bottom: 5px;
@@ -70,7 +64,6 @@ body::before {
     text-align: left;
 }
 
-/* Inputs */
 input {
     width: 100%;
     padding: 14px;
@@ -82,7 +75,6 @@ input {
     text-align: center;
 }
 
-/* Button */
 button {
     width: 100%;
     padding: 14px;
@@ -100,7 +92,6 @@ button:hover {
     box-shadow: 0 0 15px #00bfff;
 }
 
-/* Result */
 .result {
     margin-top: 20px;
     font-size: 22px;
@@ -156,7 +147,7 @@ function calculatePrice() {
 // Button click
 document.getElementById('calcBtn').addEventListener('click', calculatePrice);
 
-// Auto calculate on input change
+// Optional: Auto calculate when typing
 document.getElementById('coinInput').addEventListener('input', calculatePrice);
 document.getElementById('rateInput').addEventListener('input', calculatePrice);
 
