@@ -6,11 +6,7 @@
 <title>Premium Coin Calculator</title>
 
 <style>
-* {
-    box-sizing: border-box;
-    font-family: 'Segoe UI', sans-serif;
-}
-
+* { box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
 body {
     margin: 0;
     height: 100vh;
@@ -19,7 +15,6 @@ body {
     align-items: center;
     background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
 }
-
 .card {
     background: rgba(255,255,255,0.1);
     backdrop-filter: blur(20px);
@@ -29,19 +24,8 @@ body {
     text-align: center;
     box-shadow: 0 15px 40px rgba(0,0,0,0.5);
     color: white;
-    animation: fadeIn 1s ease;
 }
-
-@keyframes fadeIn {
-    from {opacity:0; transform: translateY(20px);}
-    to {opacity:1; transform: translateY(0);}
-}
-
-h2 {
-    margin-bottom: 20px;
-    font-weight: 600;
-}
-
+h2 { margin-bottom: 20px; font-weight: 600; }
 input {
     width: 100%;
     padding: 14px;
@@ -52,7 +36,6 @@ input {
     margin-bottom: 15px;
     text-align: center;
 }
-
 .result {
     margin-top: 20px;
     font-size: 20px;
@@ -61,47 +44,68 @@ input {
     min-height: 28px;
     transition: 0.3s;
 }
-
-.rate {
-    font-size: 12px;
-    margin-top: 15px;
-    opacity: 0.7;
+.rate-label { 
+    font-size: 12px; margin-bottom: 5px; opacity: 0.8; text-align: left; 
 }
 </style>
 </head>
 
 <body>
-
 <div class="card">
     <h2>💎 Coin Calculator</h2>
 
+    <div class="rate-label">Coin Rate (1000 coin = Ks)</div>
+    <input type="number" id="rateInput" value="74800" oninput="calculatePrice()">
+
+    <div class="rate-label">Coin Amount</div>
     <input type="number" id="coinInput" placeholder="Enter coin amount" oninput="calculatePrice()">
 
     <div class="result" id="result">0 Ks</div>
-
-    <div class="rate">Rate: 1000 coin = 74,800 Ks</div>
 </div>
 
 <script>
-let pricePerCoin = 74800 / 1000;
+// Get URL params
+function getURLParameter(name) {
+    return new URLSearchParams(window.location.search).get(name);
+}
 
+// Format numbers with commas
 function formatNumber(num) {
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
+// Initialize rate and coin from URL or default
+let rateParam = parseFloat(getURLParameter('rate'));
+let coinParam = parseFloat(getURLParameter('coin'));
+
+let rateInput = document.getElementById('rateInput');
+let coinInput = document.getElementById('coinInput');
+
+if(!isNaN(rateParam) && rateParam > 0){
+    rateInput.value = rateParam;
+}
+if(!isNaN(coinParam) && coinParam > 0){
+    coinInput.value = coinParam;
+}
+
+// Main calculation function
 function calculatePrice() {
-    let coin = document.getElementById("coinInput").value;
+    let coin = parseFloat(coinInput.value);
+    let rate = parseFloat(rateInput.value);
     let resultBox = document.getElementById("result");
 
-    if (coin === "" || coin <= 0) {
+    if(isNaN(coin)  coin <= 0  isNaN(rate) || rate <= 0){
         resultBox.innerHTML = "0 Ks";
         return;
     }
 
+    let pricePerCoin = rate / 1000;
     let total = coin * pricePerCoin;
     resultBox.innerHTML = formatNumber(total.toFixed(2)) + " Ks";
 }
-</script>
 
+// Initial calculation on page load
+calculatePrice();
+</script>
 </body>
 </html>
