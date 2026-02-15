@@ -125,7 +125,7 @@ button:hover {
     <div class="rate-label">Coin Amount</div>
     <input type="number" id="coinInput" placeholder="Enter coin amount">
 
-    <button onclick="calculatePrice()">Calculate</button>
+    <button id="calcBtn">Calculate</button>
 
     <div class="result" id="result">0 Ks</div>
 </div>
@@ -136,27 +136,31 @@ function formatNumber(num) {
 }
 
 function calculatePrice() {
-    let coinInput = document.getElementById('coinInput').value;
-    let rateInput = document.getElementById('rateInput').value;
+    const coinInput = document.getElementById('coinInput').value;
+    const rateInput = document.getElementById('rateInput').value;
 
-    let coin = parseFloat(coinInput);
-    let rate = parseFloat(rateInput);
+    const coin = parseFloat(coinInput);
+    const rate = parseFloat(rateInput);
+    const resultBox = document.getElementById("result");
 
-    let resultBox = document.getElementById("result");
-
-    // Correct logical operators
     if (isNaN(coin)  coin <= 0  isNaN(rate) || rate <= 0) {
         resultBox.innerHTML = "0 Ks";
         return;
     }
 
-    let pricePerCoin = rate / 1000;
-    let total = coin * pricePerCoin;
-
+    const pricePerCoin = rate / 1000;
+    const total = coin * pricePerCoin;
     resultBox.innerHTML = formatNumber(Math.round(total)) + " Ks";
 }
 
-// Optional: auto calculate when page loads
+// Button click
+document.getElementById('calcBtn').addEventListener('click', calculatePrice);
+
+// Auto calculate on input change
+document.getElementById('coinInput').addEventListener('input', calculatePrice);
+document.getElementById('rateInput').addEventListener('input', calculatePrice);
+
+// Initial calculate
 calculatePrice();
 </script>
 
